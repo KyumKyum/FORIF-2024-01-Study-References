@@ -1,25 +1,29 @@
 "use client";
 
+import Image from "next/image";
+import Avatar from "../../public/image/avatar.jpeg";
+import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
 import Specifics from "@/components/Specifics";
 import { useEffect, useState } from "react";
+import { observer } from "mobx-react";
+import darkModeStore from "@/store/darkModeStore";
 
-export default function Home() {
-  const [ctr, setCtr] = useState(0);
-
-  const increment = () => {
-    setCtr(ctr + 1);
-  };
-
-  useEffect(() => {
-    // Functions to execute
-    console.log("Hello! I'm useEffect!");
-  }, [ctr]);
+const Home = observer(() => {
+  const darkMode = darkModeStore.isDarkMode;
 
   return (
     <div>
-      <p className="text-2xl">{ctr}</p>
-      <button onClick={increment}>Increase!</button>
+      {darkMode ? <div>DARK!</div> : <div>WHITE!</div>}
+      <button
+        onClick={() => {
+          darkModeStore.setDarkMode(!darkMode);
+        }}
+      >
+        Change Mode
+      </button>
     </div>
   );
-}
+});
+
+export default Home;
