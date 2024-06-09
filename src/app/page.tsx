@@ -1,29 +1,19 @@
 "use client";
 
-import Image from "next/image";
-import Avatar from "../../public/image/avatar.jpeg";
-import Link from "next/link";
-import Sidebar from "@/components/Sidebar";
-import Specifics from "@/components/Specifics";
-import { useEffect, useState } from "react";
+import languageStore from "@/store/languageStore";
 import { observer } from "mobx-react";
-import darkModeStore from "@/store/darkModeStore";
+import { useEffect, useState } from "react";
 
 const Home = observer(() => {
-  const darkMode = darkModeStore.isDarkMode;
-
   return (
     <div>
-      {darkMode ? <div>DARK!</div> : <div>WHITE!</div>}
       <button
-        onClick={() => {
-          darkModeStore.setDarkMode(!darkMode);
-        }}
+        className="flex w-60 h-10 bg-black text-white"
+        onClick={languageStore.changeLanguage}
       >
-        Change Mode
+        {languageStore.language === "en" ? "Language: English" : "언어: 한국어"}
       </button>
     </div>
   );
 });
-
 export default Home;

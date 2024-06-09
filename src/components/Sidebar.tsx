@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Avatar from "../../public/image/avatar.jpeg";
+import { observer } from "mobx-react";
+import languageStore from "@/store/languageStore";
 
-export default function Sidebar() {
+const Sidebar = observer(() => {
   const moveBase = () => {
     window.location.replace("/");
   };
@@ -18,10 +20,16 @@ export default function Sidebar() {
       />
       <p className="mt-10 text-[50px] font-bold">Jay Lim</p>
       <p className="text-center">
-        Hello! Welcome to my blog.
+        {languageStore.language === "en"
+          ? "Hello! Welcome to my blog."
+          : "안녕하세요! 제 블로그에 오신 것을 환영합니다!"}
         <br />
-        Hope you guys have a nice day :)
+        {languageStore.language === "en"
+          ? "Hope you guys have a nice day :)"
+          : "여러분들 모두가 행복한 하루 보내시기를 :)"}
       </p>
     </div>
   );
-}
+});
+
+export default Sidebar;
