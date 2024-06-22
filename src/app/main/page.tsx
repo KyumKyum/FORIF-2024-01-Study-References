@@ -88,7 +88,7 @@ const MainPage = observer(() => {
                             borderRadius: "50%",
                             background: "radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.7), rgba(173, 216, 230, 0.3))",
                             boxShadow: "0 0 20px rgba(173, 216, 230, 0.5)",
-                            border: "1.5px solid rgba(255, 255, 255, 0.8)",
+                            border: "0.5px solid rgba(255, 255, 255, 0.8)",
                             backdropFilter: "blur(6px)",
                             cursor: "pointer",
                             display: "flex",
