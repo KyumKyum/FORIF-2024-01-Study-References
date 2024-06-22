@@ -19,4 +19,5 @@ model memory {
   path String
   name String
   content String
+  youtubeUrl String
 }
