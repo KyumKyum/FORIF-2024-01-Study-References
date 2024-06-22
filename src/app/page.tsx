@@ -31,9 +31,10 @@ const Home = observer(() => {
     fontSize: '3em',
     fontWeight: 'bold',
     color: 'white',
-    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+    textShadow: '2px 2px 2px rgba(26, 109, 255, 0.5)',
     marginBottom: '20px',
-    fontFamily: 'Pretendard-Regular, sans-serif'
+    fontFamily: 'Pretendard-Regular, sans-serif',
+    animation: 'fadeInUp 2s ease-out forwards', // 애니메이션을 적용합니다.
   };
 
   const handleInvitationClick = () => {
@@ -76,23 +77,19 @@ const Home = observer(() => {
           </button>
         </div>
       )}
-    <style jsx global>{`
-      @font-face {
-        font-family: 'Pretendard';
-        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-        font-weight: 400;
-        font-style: normal;
-      }
-      @font-face {
-        font-family: 'Pretendard';
-        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
-        font-weight: 700;
-        font-style: normal;
-      }
-      body {
-        font-family: 'Pretendard', sans-serif;
-      }
-    `}</style>
+      {/* 글자가 천천히 올라오는 애니메이션을 정의합니다. */}
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            transform: translateY(40px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+      `}</style>
     </div>
   );
 });

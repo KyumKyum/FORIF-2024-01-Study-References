@@ -31,7 +31,7 @@ const Login = observer(() => {
       }}
     >
       <div className="mt-5 flex flex-col h-1/2 w-1/3 bg-white shadow-2xl bg-opacity-50 border-1 border-white-500 border-opacity-130 justify-center items-center rounded-xl">
-        <p className="mt-15 text-2xl font-bold !important">Welcome!</p>
+        <p className="mt-15 text-2xl font-extrabold">Welcome!</p>
         <p className="mt-1 text-md font-normal">Remember your memories in a different way</p>
 
         <div className="mt-8 flex flex-col h-[50px] w-72 border-[1px] border-white-800 bg-white rounded-lg">
