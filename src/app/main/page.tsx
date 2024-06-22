@@ -2,6 +2,7 @@
 import { observer } from "mobx-react";
 import {useState, useEffect} from "react";
 import MainFooter from "@/components/footer/MainFooter";
+import fetchAll from "@/logic/ciient/fetch";
 
 
 
@@ -48,6 +49,12 @@ const MainPage = observer(() => {
 
         const intervalId = setInterval(moveCircle, 3000); // Move every 3 seconds
         return () => clearInterval(intervalId);
+    }, []);
+
+    useEffect(() => {
+        fetchAll().then((res) => {
+            console.log(res)
+        })
     }, []);
 
     return (

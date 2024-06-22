@@ -39,7 +39,7 @@ export async function POST(req: NextRequest, res: NextResponse){
   const filename =  generateRandomString(10) + ".png";
   console.log(filename);
 
-  const dir = path.join(process.cwd(), "public/assets/upload/" + filename)
+  const dir = path.join(process.cwd(), "public/assets/image/" + filename)
 
   await prisma.memory.create({
     data:{
