@@ -4,6 +4,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {writeFile} from "node:fs";
 import * as path from 'path'
 import prisma from "@/app/api/_client/client";
+import generateRandomString from "@/utils/randomString";
 
 interface MemoryDTO{
   id: string,
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest, res: NextResponse){
   if(!content) return NextResponse.json({message: "Not content found"}, {status: 400});
 
   const buffer = Buffer.from(await file.arrayBuffer())
-  const filename =  file.name.replaceAll(" ", "_");
+  const filename =  generateRandomString(10) + ".png";
   console.log(filename);
 
   const dir = path.join(process.cwd(), "public/assets/upload/" + filename)
