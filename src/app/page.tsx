@@ -9,56 +9,78 @@ import Image from "next/image";
 
 
 const Home = observer(() => {
+  const [invitationContent, setInvitationContent] = useState({});
+  const [showInvitation, setShowInvitation] = useState(false);
+  const [imagePath, setImagePath] = useState('/image/초대장.png');
 
-  const UserName = useRef(null);
-  const UserPassWord = useRef(null);
+
+  const language = languageStore.language || 'en'; 
+
+  const buttonStyle = {
+    backgroundColor: 'rgba(0, 0.2, 0.3, 0.5)',
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    margin: '10px',
+    cursor: 'pointer',
+    borderRadius: '5px',
+    fontSize: '16px',
+    fontFamily: 'Roboto, sans-serif'
+  };
+
+  const titleStyle = {
+    fontSize: '3em',
+    fontWeight: 'bold',
+    color: 'white',
+    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+    marginBottom: '20px',
+    fontFamily: 'Roboto, sans-serif'
+  };
+
+  const handleInvitationClick = () => {
+    setShowInvitation(!showInvitation);
+    const dir = showInvitation ? '/image/초대장.png' : '/image/편지열기.png';
+    setImagePath(dir);
+    console.log(dir)
+  };
+
 
   return (
-    <div
-      className="flex flex-col h-full w-full bg-sky-100 justify-center items-center"
-      style={{
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        backgroundImage: 'url(https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D)', // Background image
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height: '100vh',
-        width: '100vw',
-        boxSizing: 'border-box',
-        overflow: 'hidden',
-        padding: '20px',
+    <div style={{
+      backgroundImage: `url(${imagePath})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      width: '100vw',
+      height: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+      padding: '20px',
+      margin: 0
     }}>
-
-        <div className="mt-5 flex flex-col h-1/2 w-1/3 bg-white shadow-2xl justify-center items-center rounded-xl">
-
-          <p className="text-3xl font-extrabold">로그인하세요</p>
-          <p className="mt-2 text-md">추억의 사진을 색다르게 기억해보세요</p>
-
-          <div className="mt-8 flex flex-col h-[50px] w-72 border-[1px] border-gray-800 bg-white rounded-lg">
-            <textarea 
-              className="text-lg content-center placeholder-gray-600 rounded-lg" 
-              ref={UserName}
-              placeholder="이름">
-            </textarea>
+      {showInvitation ? (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+          <div>
+            
           </div>
-
-          <div className="mt-3 flex flex-col h-[50px] w-72 border-[1px] border-gray-800 bg-white rounded-lg">
-            <textarea 
-              className="text-lg content-center placeholder-gray-600 rounded-lg" 
-              ref={UserPassWord}
-              placeholder="비밀번호">
-              </textarea>
-          </div>
-
-          <Link href="/main">
-            <div className="mt-5 flex flex-col h-10 w-60 text-white bg-blue-600 justify-center items-center rounded-2xl hover:bg-blue-700 transition">로그인</div>
-          </Link>
-
-          </div>
+          <button style={{ ...buttonStyle, marginTop: 'auto' }} onClick={handleInvitationClick}>
+            {language === 'en' ? 'Back to Home' : '홈으로 돌아가기'}
+          </button>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h1 style={titleStyle}>{language === 'en' ? 'Welcome to the It was a summer day' : '홈 페이지에 오신 것을 환영합니다'}</h1>
+          <button style={buttonStyle} onClick={handleInvitationClick}>
+            {language === 'en' ? 'Go to Invitation' : '초대장으로 이동'}
+          </button>
+        </div>
+      )}
     </div>
     
   );
 });
+
 export default Home;
