@@ -158,19 +158,21 @@ const MainPage = observer(() => {
                         zIndex: 20,
                     }}
                 >
-                    <Image src={'/assets/image/' + notes[showNotepad].filename} alt={'image'} width={150} height={150}/>
-                    <p
-                        style={{
-                            width: "100%",
-                            padding: "10px",
-                            borderRadius: "20px",
-                            border: "1px solid #ddd",
-                            fontSize: "14px",
-                            resize: "none",
-                        }}
-                    >
-                        {notes[showNotepad].content}
-                    </p>
+                    <div className={"flex flex-row gap-5 items-center"}>
+                        <Image src={'/assets/image/' + notes[showNotepad].filename} alt={'image'} width={150} height={150}/>
+                        <p
+                            style={{
+                                width: 120,
+                                padding: "10px",
+                                borderRadius: "20px",
+                                border: "1px solid #ddd",
+                                fontSize: "10px",
+                                resize: "none",
+                            }}
+                        >
+                            {notes[showNotepad].content}
+                        </p>
+                    </div>
                     <input
                         type="text"
                         hidden={true}
