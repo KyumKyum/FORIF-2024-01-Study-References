@@ -1,5 +1,6 @@
 "use client";
 import { observer } from "mobx-react";
+import {useState, useEffect} from "react";
 
 const UploadButton =() => {
     return (
@@ -188,6 +189,7 @@ const MainPage = observer(() => {
                     </div>
                 </div>
             )}
+            <UploadButton/>
         </div>
     );
 });
