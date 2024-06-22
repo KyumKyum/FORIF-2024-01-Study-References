@@ -155,7 +155,7 @@ const MainFooter = () => {
 
                                     <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '20px'}}>
                                         <button
-                                            onClick={handleClosePopup}
+                                            onClick={handleClick}
                                             style={{
                                                 padding: "10px 20px",
                                                 borderRadius: "20px",
@@ -167,7 +167,7 @@ const MainFooter = () => {
                                                 marginRight: "10px",
                                             }}
                                         >
-                                            Save All
+                                            File
                                         </button>
 
                                         <button 
