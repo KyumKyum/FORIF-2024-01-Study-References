@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const uploadFile = async (file: File, name: string, content: string) => {
-    const url = "http://localhost:3000/api/upload"
+    const url = "http://localhost:3000/api/image"
     const form = new FormData();
 
     // FormData에 필드 추가

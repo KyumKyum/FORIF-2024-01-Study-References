@@ -3,27 +3,36 @@ import { observer } from "mobx-react";
 import {useState, useEffect} from "react";
 import MainFooter from "@/components/footer/MainFooter";
 import fetchAll from "@/logic/ciient/fetch";
-
-
+import Image from "next/image";
 
 interface Note {
     content: string;
-    date: string;
+    dir: string;
+    filename: string;
+}
+
+interface MemoryDTO{
+    id: string,
+    filename: string,
+    path: string,
+    name: string,
+    content: string,
 }
 
 const MainPage = observer(() => {
     const [showNotepad, setShowNotepad] = useState<number | null>(null);
-    const [notes, setNotes] = useState<Note[]>([
-        { content: "", date: "" },
-        { content: "", date: "" },
-        { content: "", date: "" }
-    ]);
-    const [positions, setPositions] = useState<{ top: string; left: string }[]>([
-        { top: '50%', left: '50%' },
-        { top: '20%', left: '70%' },
-        { top: '80%', left: '30%' },
-    ]);
-    const sizes = ["150px", "180px", "200px"];
+    const [memoryData, setMemory] = useState<MemoryDTO[]>([])
+    const [notes, setNotes] = useState<Note[]>([]);
+    const [positions, setPositions] = useState<{ top: string; left: string }[]>([]);
+    const [sizes, setSizes] = useState<string[]>([])
+
+    const generateTwoDigitNumber = (): number => {
+        return Math.floor(Math.random() * 90) + 10;
+    }
+
+    const generateSizeNumber = (): number => {
+        return Math.floor(Math.random() * 101) + 100;
+    }
 
     const handleClick = (index: number) => {
         setShowNotepad(index);
@@ -49,13 +58,39 @@ const MainPage = observer(() => {
 
         const intervalId = setInterval(moveCircle, 3000); // Move every 3 seconds
         return () => clearInterval(intervalId);
-    }, []);
+    }, [positions]);
 
     useEffect(() => {
         fetchAll().then((res) => {
-            console.log(res)
+            const memories = res.data.data as MemoryDTO[]
+            const notes: Note[] = []
+            setMemory(memories)
+
+            memories.map((value) => {
+                notes.push({dir: value.path, content: value.content, filename: value.filename})
+            })
+
+            setNotes(notes)
         })
     }, []);
+
+    useEffect(() => {
+        if(memoryData.length > 0){
+            const arr: {left: string, top: string}[] = []
+            const sizeArr: string[] = []
+            memoryData.forEach((val, idx) =>{
+                console.log(`${idx}: `+val)
+                const left = String(generateTwoDigitNumber()) +"%";
+                const top = String(generateTwoDigitNumber()) + "%";
+                const size = String(generateSizeNumber()) + "px";
+                arr.push({left, top})
+                sizeArr.push(size)
+            })
+
+            setPositions(arr)
+            setSizes(sizeArr)
+        }
+    }, [memoryData]);
 
     return (
         <div style={{
@@ -113,39 +148,8 @@ const MainPage = observer(() => {
                         zIndex: 20,
                     }}
                 >
-                    <input
-                        type="date"
-                        value={notes[showNotepad].date}
-                        onChange={(e) => {
-                            const newNotes = [...notes];
-                            newNotes[showNotepad] = {
-                                ...newNotes[showNotepad],
-                                date: e.target.value
-                            };
-                            setNotes(newNotes);
-                        }}
-                        style={{
-                            width: "100%",
-                            padding: "10px",
-                            borderRadius: "20px",
-                            border: "1px solid #ddd",
-                            fontSize: "13px",
-                            marginBottom: "10px",
-                        }}
-                    />
-                    <textarea
-                        value={notes[showNotepad].content}
-                        onChange={(e) => {
-                            const newNotes = [...notes];
-                            newNotes[showNotepad] = {
-                                ...newNotes[showNotepad],
-                                content: e.target.value
-                            };
-                            setNotes(newNotes);
-                        }}
-                        rows={10}
-                        cols={30}
-                        placeholder="Write your memory here..."
+                    <Image src={'/assets/image/' + notes[showNotepad].filename} alt={'image'} width={150} height={150}/>
+                    <p
                         style={{
                             width: "100%",
                             padding: "10px",
@@ -154,7 +158,9 @@ const MainPage = observer(() => {
                             fontSize: "14px",
                             resize: "none",
                         }}
-                    />
+                    >
+                        {notes[showNotepad].content}
+                    </p>
                     <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '10px'}}>
                         <button
                             onClick={handleSave}
