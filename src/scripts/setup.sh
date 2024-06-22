@@ -35,7 +35,7 @@ fi
 
 # Run PostgreSQL container
 docker run --rm --name $CONTAINER_NAME -p ${DATA_PORT}:5432 \
-  -v "$PROJECT_PATH/../pgdata:/var/lib/postgresql/data" \
+  -v "postgres_data:/var/lib/postgresql/data" \
   -e POSTGRES_PASSWORD=postgres \
   -e POSTGRES_USER=postgres \
   -d postgres:9.6.15-alpine
