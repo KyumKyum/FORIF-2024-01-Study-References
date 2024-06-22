@@ -12,12 +12,13 @@ interface MemoryDTO{
   path: string,
   name: string,
   content: string,
+  youtubeUrl: string,
 }
 
 export async function GET(): Promise<NextResponse<{ data: MemoryDTO[] }>> {
   //* DEMO: Fetch all
 
-  const data: MemoryDTO[] = await prisma.memory.findMany() //* Query All
+  const data: MemoryDTO[] = await prisma.memory.findMany()//* Query All
 
   return NextResponse.json({
     data

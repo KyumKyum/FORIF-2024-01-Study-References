@@ -9,6 +9,7 @@ interface Note {
     content: string;
     dir: string;
     filename: string;
+    youtubeUrl: string;
 }
 
 interface MemoryDTO{
@@ -17,6 +18,7 @@ interface MemoryDTO{
     path: string,
     name: string,
     content: string,
+    youtubeUrl: string,
 }
 
 const MainPage = observer(() => {
@@ -47,6 +49,14 @@ const MainPage = observer(() => {
         setShowNotepad(null);
     };
 
+    const getYouTubeEmbedUrl = (url: string) => {
+        const match = url.match(
+            /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/
+        );
+        return match ? `https://www.youtube.com/embed/${match[1]}` : "";
+    };
+
+
     useEffect(() => {
         const moveCircle = () => {
             setPositions(positions.map(() => {
@@ -67,7 +77,7 @@ const MainPage = observer(() => {
             setMemory(memories)
 
             memories.map((value) => {
-                notes.push({dir: value.path, content: value.content, filename: value.filename})
+                notes.push({youtubeUrl: value.youtubeUrl, dir: value.path, content: value.content, filename: value.filename})
             })
 
             setNotes(notes)
@@ -161,6 +171,31 @@ const MainPage = observer(() => {
                     >
                         {notes[showNotepad].content}
                     </p>
+                    <input
+                        type="text"
+                        hidden={true}
+                        placeholder="Enter YouTube URL"
+                        value={notes[showNotepad].youtubeUrl}
+                        style={{
+                            width: "100%",
+                            padding: "10px",
+                            borderRadius: "20px",
+                            border: "1px solid #ddd",
+                            fontSize: "13px",
+                            marginBottom: "10px",
+                        }}
+                    />
+                    {notes[showNotepad].youtubeUrl && (
+                        <iframe
+                            width="100%"
+                            height="315"
+                            src={getYouTubeEmbedUrl(notes[showNotepad].youtubeUrl)}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{ marginBottom: "10px" }}
+                        ></iframe>
+                    )}
                     <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '10px'}}>
                         <button
                             onClick={handleSave}
