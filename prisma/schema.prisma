@@ -17,5 +17,6 @@ model memory {
   id String @id @default(uuid())
   filename String
   path String
+  name String
   content String
 }

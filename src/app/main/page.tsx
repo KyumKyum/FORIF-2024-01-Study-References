@@ -1,17 +1,9 @@
 "use client";
 import { observer } from "mobx-react";
 import {useState, useEffect} from "react";
+import MainFooter from "@/components/footer/MainFooter";
 
-const UploadButton =() => {
-    return (
-        <div>
-            <button className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition"
-            >
-                Upload
-            </button>
-        </div>
-    );
-};
+
 
 interface Note {
     content: string;
@@ -156,7 +148,7 @@ const MainPage = observer(() => {
                             resize: "none",
                         }}
                     />
-                    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '10px' }}>
+                    <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '10px'}}>
                         <button
                             onClick={handleSave}
                             style={{
@@ -189,7 +181,7 @@ const MainPage = observer(() => {
                     </div>
                 </div>
             )}
-            <UploadButton/>
+            <MainFooter/>
         </div>
     );
 });

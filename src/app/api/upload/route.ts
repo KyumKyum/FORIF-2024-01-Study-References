@@ -9,13 +9,14 @@ interface MemoryDTO{
   id: string,
   filename: string,
   path: string,
+  name: string,
   content: string,
 }
 
 export async function GET(): Promise<NextResponse<{ data: MemoryDTO[] }>> {
   //* DEMO: Fetch all
 
-  const data = await prisma.memory.findMany() //* Query All
+  const data: MemoryDTO[] = await prisma.memory.findMany() //* Query All
 
   return NextResponse.json({
     data
@@ -28,6 +29,7 @@ export async function POST(req: NextRequest, res: NextResponse){
   const file:File = formData.get("file") as File
 
   const content: string = formData.get("content") as string
+  const name: string = formData.get("name") as string
 
   if(!file) return NextResponse.json({message: "Not file found"}, {status: 400});
   if(!content) return NextResponse.json({message: "Not content found"}, {status: 400});
@@ -42,7 +44,8 @@ export async function POST(req: NextRequest, res: NextResponse){
     data:{
       filename,
       path: dir,
-      content
+      name,
+      content,
     }
   }).catch((err) => {
     console.log("Prisma error ", err)
