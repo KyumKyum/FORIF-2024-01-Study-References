@@ -1,9 +1,9 @@
-import redisClient from "@/provider/redis";
+import {redisClientPub, redisClientSub} from "@/provider/redis";
 
 export const publish = (message: string) => {
-    redisClient.publish('chat', message);
+    redisClientPub.publish('chat', message);
 }
 
 export const subscribe = () => {
-    redisClient.subscribe('chat')
+    redisClientSub.subscribe('chat')
 }

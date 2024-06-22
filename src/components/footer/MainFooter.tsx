@@ -6,9 +6,9 @@ const MainFooter = () => {
     const [showPopup, setShowPopup] = useState(false); // popup
     const [chat, setChat] = useState('')
 
-    const [WriterName, setWriterName] = useState('');
-    const [Content, setContent] = useState('');
-    const [SourceLink, setSourceLink] = useState('');
+    const [writerName, setWriterName] = useState('');
+    const [content, setContent] = useState('');
+    const [sourceLink, setSourceLink] = useState('');
 
     const uploadBtn = useRef<HTMLInputElement | null>(null);
     
@@ -29,8 +29,8 @@ const MainFooter = () => {
         setChat(event.target.value);
     }
 
-    const handleUpload = async () => {
-        await uploadFile(image, "test", "test", "TODO").then(() => {window.location.reload()});
+    const handleUpload = async (name: string, content: string, youtubeUrl: string) => {
+        await uploadFile(image, name, content, youtubeUrl).then(() => {window.location.reload()});
     }
 
     const handleButtonClick = () => { // Choose File 클릭
@@ -39,9 +39,6 @@ const MainFooter = () => {
 
     const handleClosePopup = () => { // 팝업 닫기
         setShowPopup(false);
-        console.log(WriterName);
-        console.log(Content);
-        console.log(SourceLink);
 
         setWriterName(''); // 데이터 초기화
         setContent('');
@@ -113,7 +110,7 @@ const MainFooter = () => {
                                     <textarea
                                         className="text-lg content-center placeholder-gray-600 rounded-lg"
                                         placeholder="Name"
-                                        value={WriterName}
+                                        value={writerName}
                                         onChange={handleName}
                                         style={{
                                             marginTop: "10px",
@@ -130,7 +127,7 @@ const MainFooter = () => {
                                     <textarea
                                         className="text-lg placeholder-gray-600 rounded-lg"
                                         placeholder="Put your great memories!"
-                                        value={Content}
+                                        value={content}
                                         onChange={handleContent}
                                         style={{
                                             marginTop: "10px",
@@ -147,7 +144,7 @@ const MainFooter = () => {
                                     <textarea
                                         className="text-lg content-center placeholder-gray-600 rounded-lg"
                                         placeholder="Source"
-                                        value={SourceLink}
+                                        value={sourceLink}
                                         onChange={handleSourceLink}
                                         style={{
                                             marginTop: "10px",
@@ -207,7 +204,7 @@ const MainFooter = () => {
                 {/* <div>
                     <button
                         className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition"
-                        onClick={() => {handleUpload()}}
+                        onClick={() => {handleUpload(writerName, content, sourceLink)}}
                     >
                         Upload
                     </button>

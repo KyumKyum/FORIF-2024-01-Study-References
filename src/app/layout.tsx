@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Canvas from "@/components/layout/Canvas";
 import {subscribe} from "@/logic/redis/pubsub";
-import redisClient from "@/provider/redis";
+import {redisClientSub} from "@/provider/redis";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +20,7 @@ export default function RootLayout({
 
     subscribe();
 
-    redisClient.on('chat', (_, message) => {
+    redisClientSub.on('chat', (channel, message) => {
         console.log(message)
     })
     
