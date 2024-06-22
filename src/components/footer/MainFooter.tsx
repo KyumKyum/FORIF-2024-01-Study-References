@@ -58,6 +58,24 @@ const MainFooter = () => {
         <div className={"fixed flex bottom-0 w-full items-center h-16 px-5"}>
             <div className={"flex flex-row w-full gap-5"}>
                 <div>
+
+                    <p 
+                        className="text-2xl text-center font-bold text-gray-600"
+                        style={{
+                            position: "fixed",
+                            bottom: 550,
+                            marginLeft: 550,
+                            justifyContent: "center",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            width: "300px",
+                            wordWrap: "break-word",
+                            overflowWrap: "break-word",
+                            whiteSpace: "pre-wrap",
+                        }}
+                        >sample</p>
+
                     <button
                         className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition"
                         onClick={handleButtonClick} // handleClick -> handleButtonClick
@@ -154,8 +172,8 @@ const MainFooter = () => {
 
                                         <button 
                                             className="mr-3 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition"
-                                            onClick={handleClick}>
-                                            File
+                                            onClick={handleUpload}>
+                                            Upload
                                         </button>
 
                                         <button
@@ -178,14 +196,14 @@ const MainFooter = () => {
                     }
                 </div>
                 <input type="file" id="file" accept={".png"} ref={uploadBtn} style={{display: "none"}} onChange={onChangeFile}/>
-                <div>
+                {/* <div>
                     <button
                         className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition"
                         onClick={() => {handleUpload()}}
                     >
                         Upload
                     </button>
-                </div>
+                </div> */}
             </div>
         </div>
     )
