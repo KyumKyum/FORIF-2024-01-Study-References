@@ -5,7 +5,7 @@ import {useState, useEffect} from "react";
 const UploadButton =() => {
     return (
         <div>
-            <button className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition"
+            <button className="px-4 py-2 bg-blue-500 bg-opacity-85 text-white rounded-full hover:bg-blue-700 transition" 
             >
                 Upload
             </button>
@@ -88,7 +88,7 @@ const MainPage = observer(() => {
                             borderRadius: "50%",
                             background: "radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.7), rgba(173, 216, 230, 0.3))",
                             boxShadow: "0 0 20px rgba(173, 216, 230, 0.5)",
-                            border: "1px solid rgba(255, 255, 255, 0.8)",
+                            border: "1.5px solid rgba(255, 255, 255, 0.8)",
                             backdropFilter: "blur(6px)",
                             cursor: "pointer",
                             display: "flex",
@@ -104,9 +104,9 @@ const MainPage = observer(() => {
                     style={{
                         marginTop: "20px",
                         padding: "20px",
-                        borderRadius: "10px",
+                        borderRadius: "15px",
                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                        backgroundColor: "#f9f9f9",
+                        backgroundColor:"rgba(249, 249, 249, 0.7)",
                         width: "400px",
                         display: "flex",
                         flexDirection: "column",
@@ -128,9 +128,9 @@ const MainPage = observer(() => {
                         style={{
                             width: "100%",
                             padding: "10px",
-                            borderRadius: "5px",
+                            borderRadius: "20px",
                             border: "1px solid #ddd",
-                            fontSize: "14px",
+                            fontSize: "13px",
                             marginBottom: "10px",
                         }}
                     />
@@ -150,7 +150,7 @@ const MainPage = observer(() => {
                         style={{
                             width: "100%",
                             padding: "10px",
-                            borderRadius: "5px",
+                            borderRadius: "20px",
                             border: "1px solid #ddd",
                             fontSize: "14px",
                             resize: "none",
@@ -161,7 +161,7 @@ const MainPage = observer(() => {
                             onClick={handleSave}
                             style={{
                                 padding: "10px 20px",
-                                borderRadius: "5px",
+                                borderRadius: "20px",
                                 backgroundColor: "#ADD8E6",
                                 color: "white",
                                 border: "none",
@@ -176,7 +176,7 @@ const MainPage = observer(() => {
                             onClick={handleBack}
                             style={{
                                 padding: "10px 20px",
-                                borderRadius: "5px",
+                                borderRadius: "20px",
                                 backgroundColor: "#FF6F61",
                                 color: "white",
                                 border: "none",
