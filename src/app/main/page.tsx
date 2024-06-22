@@ -1,7 +1,7 @@
 "use client";
 import { observer } from "mobx-react";
 
-const Profile = observer(() => {
+const MainPage = observer(() => {
   return (
     <div>
 
@@ -9,4 +9,4 @@ const Profile = observer(() => {
   );
 });
 
-export default Profile;
+export default MainPage;
