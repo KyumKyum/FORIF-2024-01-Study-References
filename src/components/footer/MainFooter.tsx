@@ -4,7 +4,8 @@ import uploadFile from "@/logic/ciient/upload";
 const MainFooter = () => {
     const [image, setImage] = useState<any>(null);
     const [showPopup, setShowPopup] = useState(false); // popup
-    
+    const [chat, setChat] = useState('')
+
     const [WriterName, setWriterName] = useState('');
     const [Content, setContent] = useState('');
     const [SourceLink, setSourceLink] = useState('');
@@ -23,8 +24,13 @@ const MainFooter = () => {
         setImage(file)
     }
 
+    const onChangeChat = (event: any) => {
+        event.preventDefault()
+        setChat(event.target.value);
+    }
+
     const handleUpload = async () => {
-        await uploadFile(image, "test", "test").then(() => {window.location.reload()});
+        await uploadFile(image, "test", "test", "TODO").then(() => {window.location.reload()});
     }
 
     const handleButtonClick = () => { // Choose File 클릭
@@ -54,12 +60,14 @@ const MainFooter = () => {
         setSourceLink(event.target.value);
     }
 
+
+
     return (
         <div className={"fixed flex bottom-0 w-full items-center h-16 px-5"}>
             <div className={"flex flex-row w-full gap-5"}>
                 <div>
 
-                    <p 
+                    <p
                         className="text-2xl text-center font-bold text-gray-600"
                         style={{
                             position: "fixed",
@@ -204,6 +212,31 @@ const MainFooter = () => {
                         Upload
                     </button>
                 </div> */}
+                <>
+                    <textarea
+                        className="text-lg content-center placeholder-gray-600 rounded-lg"
+                        placeholder="chat"
+                        onChange={onChangeChat}
+                        value={chat}
+                        style={{
+                            marginTop: "10px",
+                            width: "350px",
+                            height: "40px",
+                            borderRadius: "20px",
+                            border: "1px solid #ddd",
+                            fontSize: "10px",
+                            resize: "none",
+                        }}>
+                    </textarea>
+                    <button
+                        className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition"
+                        onClick={() => {
+                            console.log(chat)
+                        }}
+                    >
+                        send
+                    </button>
+                </>
             </div>
         </div>
     )

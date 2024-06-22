@@ -81,7 +81,7 @@ const MainPage = observer(() => {
             })
 
             setNotes(notes)
-        })
+        });
     }, []);
 
     useEffect(() => {
