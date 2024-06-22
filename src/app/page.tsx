@@ -130,6 +130,7 @@ const Home = observer(() => {
         }
       `}</style>
     </div>
+
   );
 });
 
