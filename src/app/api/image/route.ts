@@ -32,6 +32,7 @@ export async function POST(req: NextRequest, res: NextResponse){
 
   const content: string = formData.get("content") as string
   const name: string = formData.get("name") as string
+  const youtubeUrl: string = formData.get("youtubeUrl") as string
 
   if(!file) return NextResponse.json({message: "Not file found"}, {status: 400});
   if(!content) return NextResponse.json({message: "Not content found"}, {status: 400});
@@ -48,6 +49,7 @@ export async function POST(req: NextRequest, res: NextResponse){
       path: dir,
       name,
       content,
+      youtubeUrl
     }
   }).catch((err) => {
     console.log("Prisma error ", err)
