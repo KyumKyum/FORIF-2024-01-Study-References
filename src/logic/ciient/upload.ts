@@ -20,7 +20,7 @@ const uploadFile = async (file: File, name: string, content: string, youtubeUrl:
     form.append('name', name);
     form.append('file', file);
     form.append('content', content);
-    form.append('youtube', youtubeUrl)
+    form.append('youtubeUrl', youtubeUrl)
 
     await axios.post(url, form, {
         headers: {
