@@ -5,9 +5,9 @@ const MainFooter = () => {
     const [image, setImage] = useState<any>(null);
     const [showPopup, setShowPopup] = useState(false); // popup
     
-    const WriterName = useRef(null);
-    const Content = useRef(null);
-    const SourceLink = useRef(null);
+    const [WriterName, setWriterName] = useState('');
+    const [Content, setContent] = useState('');
+    const [SourceLink, setSourceLink] = useState('');
 
     const uploadBtn = useRef<HTMLInputElement | null>(null);
     
@@ -33,7 +33,26 @@ const MainFooter = () => {
 
     const handleClosePopup = () => { // 팝업 닫기
         setShowPopup(false);
+        console.log(WriterName);
+        console.log(Content);
+        console.log(SourceLink);
+
+        setWriterName(''); // 데이터 초기화
+        setContent('');
+        setSourceLink('');
     };
+
+    const handleName = (event : any) => {
+        setWriterName(event.target.value);
+    }
+
+    const handleContent = (event : any) => {
+        setContent(event.target.value);
+    }
+
+    const handleSourceLink = (event : any) => {
+        setSourceLink(event.target.value);
+    }
 
     return (
         <div className={"fixed flex bottom-0 w-full items-center h-16 px-5"}>
@@ -68,7 +87,8 @@ const MainFooter = () => {
                                     <textarea
                                         className="text-lg content-center placeholder-gray-600 rounded-lg"
                                         placeholder="Name"
-                                        ref={WriterName}
+                                        value={WriterName}
+                                        onChange={handleName}
                                         style={{
                                             marginTop: "10px",
                                             width: "350px",
@@ -84,7 +104,8 @@ const MainFooter = () => {
                                     <textarea
                                         className="text-lg placeholder-gray-600 rounded-lg"
                                         placeholder="Put your great memories!"
-                                        ref={Content}
+                                        value={Content}
+                                        onChange={handleContent}
                                         style={{
                                             marginTop: "10px",
                                             width: "350px",
@@ -100,7 +121,8 @@ const MainFooter = () => {
                                     <textarea
                                         className="text-lg content-center placeholder-gray-600 rounded-lg"
                                         placeholder="Source"
-                                        ref={SourceLink}
+                                        value={SourceLink}
+                                        onChange={handleSourceLink}
                                         style={{
                                             marginTop: "10px",
                                             width: "350px",
