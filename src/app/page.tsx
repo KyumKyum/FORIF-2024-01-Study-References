@@ -53,7 +53,7 @@ const Home = observer(() => {
           </div>
 
           <Link href="/main">
-            <div className="mt-5 flex flex-col h-10 w-60 text-white bg-blue-600 justify-center items-center rounded-2xl">로그인</div>
+            <div className="mt-5 flex flex-col h-10 w-60 text-white bg-blue-600 justify-center items-center rounded-2xl hover:bg-blue-700 transition">로그인</div>
           </Link>
 
           </div>
