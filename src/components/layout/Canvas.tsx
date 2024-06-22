@@ -7,7 +7,7 @@ interface CanvasProps {
 export default function Canvas({ children }: CanvasProps) {
   return (
     <main className="flex flex-row h-svh">
-sss
+      {children}
     </main>
   );
 }
