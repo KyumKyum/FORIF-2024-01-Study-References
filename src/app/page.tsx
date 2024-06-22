@@ -9,6 +9,7 @@ import nameStore from '@/store/namestore';
 
 
 const Home = observer(() => {
+  const [invitationContent, setInvitationContent] = useState({})
   const [showInvitation, setShowInvitation] = useState(false);
   const [imagePath, setImagePath] = useState('/image/초대장.png');
 

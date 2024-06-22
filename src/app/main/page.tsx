@@ -187,8 +187,8 @@ const MainPage = observer(() => {
                     />
                     {notes[showNotepad].youtubeUrl && (
                         <iframe
-                            width="100%"
-                            height="315"
+                            width="200"
+                            height="150"
                             src={getYouTubeEmbedUrl(notes[showNotepad].youtubeUrl)}
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
