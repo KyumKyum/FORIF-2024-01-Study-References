@@ -5,23 +5,26 @@ import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 
 const Home = observer(() => {
-  const [invitationContent, setInvitationContent] = useState({});
   const [showInvitation, setShowInvitation] = useState(false);
   const [imagePath, setImagePath] = useState('/image/초대장.png');
-
 
   const language = languageStore.language || 'en'; 
 
   const buttonStyle = {
-    backgroundColor: 'rgba(0, 0.2, 0.3, 0.5)',
+    backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))',
     color: 'white',
     border: 'none',
     padding: '10px 20px',
     margin: '10px',
     cursor: 'pointer',
-    borderRadius: '5px',
+    borderRadius: '30px',
     fontSize: '16px',
-    fontFamily: 'Roboto, sans-serif'
+    fontFamily: 'Pretendard-Regular, sans-serif',
+    transition: 'background-image 0.3s ease',  // hover 효과를 부드럽게 만들기 위한 transition 추가
+  };
+  
+  const buttonHoverStyle = {
+    backgroundImage: 'linear-gradient(to top, rgba(217, 185, 255, 0.7), rgba(217, 185, 255, 0.2))',  // hover 시 그라데이션 효과를 더 강조합니다.
   };
 
   const titleStyle = {
@@ -30,7 +33,7 @@ const Home = observer(() => {
     color: 'white',
     textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
     marginBottom: '20px',
-    fontFamily: 'Roboto, sans-serif'
+    fontFamily: 'Pretendard-Regular, sans-serif'
   };
 
   const handleInvitationClick = () => {
@@ -39,7 +42,6 @@ const Home = observer(() => {
     setImagePath(dir);
     console.log(dir)
   };
-
 
   return (
     <div style={{
@@ -60,7 +62,7 @@ const Home = observer(() => {
       {showInvitation ? (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
           <div>
-            
+            {/* 추가적인 내용이 여기에 들어갑니다. */}
           </div>
           <button style={{ ...buttonStyle, marginTop: 'auto' }} onClick={handleInvitationClick}>
             {language === 'en' ? 'Back to Home' : '홈으로 돌아가기'}
@@ -74,6 +76,23 @@ const Home = observer(() => {
           </button>
         </div>
       )}
+    <style jsx global>{`
+      @font-face {
+        font-family: 'Pretendard';
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Pretendard';
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+        font-weight: 700;
+        font-style: normal;
+      }
+      body {
+        font-family: 'Pretendard', sans-serif;
+      }
+    `}</style>
     </div>
   );
 });
