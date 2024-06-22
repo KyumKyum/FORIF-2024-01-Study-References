@@ -2,13 +2,16 @@
 
 import languageStore from "@/store/languageStore";
 import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from "react";
+import nameStore from '@/store/namestore';
+
 
 const Home = observer(() => {
   const [showInvitation, setShowInvitation] = useState(false);
   const [imagePath, setImagePath] = useState('/image/초대장.png');
 
-  const language = languageStore.language || 'en'; 
+  const language = languageStore.language || 'en';
 
   const buttonStyle = {
     backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))',
@@ -22,7 +25,7 @@ const Home = observer(() => {
     fontFamily: 'Pretendard-Regular, sans-serif',
     transition: 'background-image 0.3s ease',  // hover 효과를 부드럽게 만들기 위한 transition 추가
   };
-  
+
   const buttonHoverStyle = {
     backgroundImage: 'linear-gradient(to top, rgba(217, 185, 255, 0.7), rgba(217, 185, 255, 0.2))',  // hover 시 그라데이션 효과를 더 강조합니다.
   };
@@ -37,11 +40,40 @@ const Home = observer(() => {
     animation: 'fadeInUp 2s ease-out forwards', // 애니메이션을 적용합니다.
   };
 
+  const nameStyle = {
+    fontSize: '2em',
+    fontWeight: 'bold',
+    color: 'white',
+    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+    margin: '200px',
+    fontFamily: 'Roboto, sans-serif',
+    position: 'absolute',
+    top: '20px',
+  };
+
+  useEffect(() => {
+    setInvitationContent({
+      en: {
+        title: `You are Invited to 'It was a summer'!`,
+        message: "Thank you for accepting our invitation."
+      },
+      ko: {
+        title: `'여름이였다'에 초대합니다!`,
+        message: "우리의 초대를 받아주셔서 감사합니다."
+      }
+    });
+  }, [nameStore.name]);
+
+  const router = useRouter();
+
   const handleInvitationClick = () => {
     setShowInvitation(!showInvitation);
     const dir = showInvitation ? '/image/초대장.png' : '/image/편지열기.png';
     setImagePath(dir);
-    console.log(dir)
+  };
+
+  const handleLoginClick = () => {
+    router.push('/login');
   };
 
   return (
@@ -58,16 +90,22 @@ const Home = observer(() => {
       alignItems: 'center',
       textAlign: 'center',
       padding: '20px',
-      margin: 0
+      margin: 0,
+      position: 'relative'
     }}>
+      <div style={nameStyle}>{`To. ${nameStore.name || 'Guest'}`}</div>
       {showInvitation ? (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-          <div>
-            {/* 추가적인 내용이 여기에 들어갑니다. */}
+          <h1 style={titleStyle}>{invitationContent[language]?.title}</h1>
+          <p style={{ fontFamily: 'Roboto, sans-serif', color: 'white' }}>{invitationContent[language]?.message}</p>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <button style={buttonStyle} onClick={handleInvitationClick}>
+              {language === 'en' ? 'Back to Home' : '홈으로 돌아가기'}
+            </button>
+            <button style={buttonStyle} onClick={handleLoginClick}>
+              {language === 'en' ? 'Accept Invitation' : '로그인으로 이동'}
+            </button>
           </div>
-          <button style={{ ...buttonStyle, marginTop: 'auto' }} onClick={handleInvitationClick}>
-            {language === 'en' ? 'Back to Home' : '홈으로 돌아가기'}
-          </button>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -75,6 +113,7 @@ const Home = observer(() => {
           <button style={buttonStyle} onClick={handleInvitationClick}>
             {language === 'en' ? 'Go to Invitation' : '초대장으로 이동'}
           </button>
+
         </div>
       )}
       {/* 글자가 천천히 올라오는 애니메이션을 정의합니다. */}
